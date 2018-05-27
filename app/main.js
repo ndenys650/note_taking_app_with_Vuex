@@ -14,12 +14,35 @@ const mutations = {
   }
 }
 
+const actions = {
+  addNote (context, payload) {
+    context.commit('ADD_NOTE', payload);
+  },
+  addTimeStamp (context, payload) {
+    context.commit('ADD_TIMESTAMP', payload);
+  }
+}
+
+const getters = {
+  getNotes: state => state.notes,
+  getTimeStamps: state => state.timestamps,
+  getNoteCount: state => state.notes.length
+}
+
+const store = new Vuex.store({
+  state,
+  mutations,
+  actions,
+  getters
+})
+
 const inputComponent = {
   template: `<input placeholder='Enter a note' class="input is-small" type="text" />`,
 }
 
 new Vue({
   el: '#app',
+  store,
   components: {
     'input-component': inputComponent
   }
